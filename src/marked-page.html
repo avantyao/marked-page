@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>markdown page</title>
+<meta name="keywords" content="markdown" />
+<meta name="description" content="markdown page" />
+<link rel="stylesheet" type="text/css" href="marked.css" media="all" />
+</head>
+<body>
+<textarea id="text-input" oninput="this.editor.update()" rows="6" cols="80">
+在此输入 **Markdown** .
+
+我是标题1
+=========
+
+通过空行来分段落。
+
+第二段. *Italic*, **bold**, `monospace`. 无序列表
+形如:
+
+  * this one
+  * that one
+  * the other one
+
+注意 **无视星号** 真正的文本内容从第四列开
+始。
+
+> 块状引用这样写。
+>
+> 还可以跨多个段落,
+> 只要你喜欢.
+
+
+我是标题2
+---------
+
+下面是有序列表:
+
+ 1. first item
+ 2. second item
+ 3. third item
+
+下面是 code 实例:
+
+    # Let me re-iterate ...
+    for i in 1 .. 10 { do-something(i) }
+
+对, 缩进4个空格即可. 另外, 除了
+缩进块, 也可以用前后各三个~或者·标示，如:
+
+~~~
+define foobar() {
+    print "Welcome to flavor country!";
+}
+~~~
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+
+可选支持Pandoc的语法高亮:
+
+~~~python
+import time
+# Quick, count to ten!
+for i in range(10):
+    # (but not *too* quick)
+    time.sleep(0.5)
+    print i
+~~~
+
+
+### 用三个#标记标题3 ###
+
+Now a nested list:
+ 1. First, get these ingredients:
+
+      * carrots
+      * celery
+      * lentils
+
+ 2. Boil some water.
+ 3. Dump everything in the pot and follow
+    this algorithm:
+
+        find wooden spoon
+        uncover pot
+        stir
+        cover pot
+        balance wooden spoon precariously on pot handle
+        wait 10 minutes
+        goto first step (or shut off burner when done)
+
+    Do not bump wooden spoon or it will fall.
+
+再次提醒，4空格缩进。
+
+---
+
+试试链接：链到网站 [百度](http://www.baidu.com). 
+
+表格这么标记:
+
+
+| 左对齐        | 居中对齐      | 右对齐 |
+| ------------- |:-------------:| ------:|
+| col 3 is      | right-aligned |  $1600 |
+| col 2 is      | centered      |    $12 |
+| zebra stripes | are neat      |     $1 |
+
+![markdown](markdown-icon.png)
+</textarea>
+<div id="markdown-body"> </div>
+<script type="text/javascript" src="marked.js" ></script>
+<script>
+  function Editor(input, preview) {
+    this.update = function () {
+      preview.innerHTML = marked(input.value);
+    };
+    input.editor = this;
+    this.update();
+  }
+  var $ = function (id) { return document.getElementById(id); };
+  new Editor($("text-input"), $("markdown-body"));
+  $("markdown-body").innerHTML = marked($("text-input").value);
+</script>
+
+</body>
+</html>
